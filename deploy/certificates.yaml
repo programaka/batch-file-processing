@@ -1,0 +1,18 @@
+apiVersion: cert-manager.io/v1alpha2
+kind: Certificate
+metadata:
+  name: tls-secret
+  namespace: ingress-static
+spec:
+  secretName: tls-secret
+  dnsNames:
+  - <DNS_name>
+  acme:
+    config:
+    - http01:
+        ingressClass: nginx
+      domains:
+      - <DNS_name>
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer

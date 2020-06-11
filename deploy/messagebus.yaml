@@ -8,8 +8,8 @@ spec:
   - name: connectionString
     value: <namespace_connection_string> # Required.
   - name: maxActiveMessages
-    value: 10
+    value: "1"
   - name: lockRenewalInSec
-    value: 0
+    value: "0"
   - name: maxDeliveryCount
-    value: 10
+    value: "10"
