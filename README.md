@@ -1,4 +1,4 @@
-# Batch File Processing Dapr End to End Sample
+# Dapr - Batch File Processing End to End Sample
 
 This sample demonstrates an end to end sample for processing a batch of related text files using microservices and Dapr. Through this sample you will learn about Dapr's state management, bindings, pub sub, and end to end tracing.
 
@@ -20,7 +20,7 @@ This sample implementation for the batch file processing scenario combines Dapr 
 
 Azure Storage receives batches of files (from the batch generator simulator). Each file will trigger an Event Grid notification to a Batch Receiver microservice that uses state management to identify when all files for a batch have arrived. Then Pub Sub is used to trigger a Batch Processor that will transform the batches into individual JSON based orders, and save to Cosmos DB. Dapr's end to end tracing is used to send tracing information to App Insights. Pub Sub is used to provide a layer of load levelling and for scaling the Batch Processor using KEDA, as the processor does the bulk of the processing work.
 
-<img src="images/solution-diagram.png">
+![Solution Diagram](images/solution-diagram.png)
 
 In this reference implementation the following components are used.
 
@@ -89,7 +89,6 @@ References:
 * [Deploy AKS using CLI](https://github.com/dapr/docs/blob/master/getting-started/cluster/setup-aks.md)
 * [Setup Cluster](https://github.com/dapr/docs/blob/master/getting-started/environment-setup.md#setup-cluster)
 
-
 ### Install Dapr
 
 * [Install Dapr CLI](https://github.com/dapr/docs/blob/master/getting-started/environment-setup.md#installing-dapr-cli)
@@ -98,7 +97,6 @@ References:
 
 References:
 [Dapr Environment Setup](https://github.com/dapr/docs/blob/master/getting-started/environment-setup.md)
-
 
 ### Create Blob Storage
 
@@ -218,12 +216,12 @@ References:
 
 ### Set up distributed tracing
 
-#### Application Insights:
+#### Application Insights
 
 1. Follow [this guide](https://docs.microsoft.com/en-us/azure/azure-monitor/app/create-new-resource) to create an Application Insights resource.
 2. Copy the value of the *Instrumentation Key*.
 
-#### LocalForwarder:
+#### LocalForwarder
 
 1. Open the [deployment file](/deploy/localforwarder-deployment.yaml) and set the Instrumentation Key value.
 2. Deploy the LocalForwarder to your cluster.
