@@ -9,31 +9,32 @@
 
 ## Set up Cluster
 
-In this sample we'll be using AKS, but you can install Dapr on any Kubernetes cluster.
+In this sample we'll be using Azure Kubernetes Service, but you can install Dapr on any Kubernetes cluster.
+Run [this script](scripts/deploy_aks.ps1) to deploy an AKS cluster or follow the steps below.
 
-Log in to Azure:
+1. Log in to Azure:
 
-```Shell
-az login
-```
+    ```Shell
+    az login
+    ```
 
-Set the default subscription:
+2. Set the default subscription:
 
-```Shell
-az account set -s <subscription-id>
-```
+    ```Shell
+    az account set -s <subscription-id>
+    ```
 
-Create a resource group:
+3. Create a resource group:
 
-```Shell
-az group create --name <resource-group-name> --location <location> (ex: westus2)
-```
+    ```Shell
+    az group create --name <resource-group-name> --location <location> (ex: westus2)
+    ```
 
-Create an Azure Kubernetes Service cluster:
+4. Create an Azure Kubernetes Service cluster:
 
-```Shell
-az aks create --resource-group <resource-group-name> --name <cluster-name> --node-count 2 --kubernetes-version 1.14.8 --enable-addons http_application_routing --generate-ssh-keys --location westus2
-```
+    ```Shell
+    az aks create --resource-group <resource-group-name> --name <cluster-name> --node-count 2 --kubernetes-version 1.14.8 --enable-addons http_application_routing --generate-ssh-keys --location westus2
+    ```
 
 References:
 
@@ -43,7 +44,7 @@ References:
 
 ## Install Dapr
 
-Install Dapr on the Kubernetes cluster using Helm:
+Run [this script](scripts/deploy_dapr_aks.ps1) to install Dapr on the Kubernetes cluster or follow the steps below.
 
 ```Shell
 helm repo add dapr https://daprio.azurecr.io/helm/v1/repo
@@ -58,6 +59,8 @@ References:
 * [Install Dapr on a Kubernetes cluster using Helm](https://github.com/dapr/docs/blob/master/getting-started/environment-setup.md#using-helm-advanced)
 
 ## Create Blob Storage
+
+Run [this script](scripts/deploy_storage.ps1) to execute steps 1 through 4 or follow the steps below.
 
 1. Create a storage account of kind StorageV2 (general purpose v2) in your Azure Subscription:
 
@@ -110,9 +113,11 @@ References:
 * [Create a container in Azure Storage - Portal](https://docs.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-portal)
 * [Manage Azure Storage resources - CLI](https://docs.microsoft.com/en-us/cli/azure/storage?view=azure-cli-latest)
 
-## Create an ingress controller with a static public IP
+## Deploy NGINX
 
-Run [this script](scripts\deploy_NGINX.ps1) to deploy the NGINX ingress controller and map a DNS name to the public IP or follow these steps:
+In this section we will deploy an NGINX ingress controller with a static public IP and map the IP to a DNS name.
+
+Run [this script](scripts\deploy_NGINX.ps1) to execute steps 1 through 6 or follow the steps below.
 
 1. Initialize variables:
 
@@ -173,8 +178,7 @@ Run [this script](scripts\deploy_NGINX.ps1) to deploy the NGINX ingress controll
 
 7. Copy the domain name, we will need it in the next step.
 
-It may take a few minutes for the LoadBalancer IP to be available.
-You can watch the status by running:
+8. Verify the installation. It may take a few minutes for the LoadBalancer IP to be available. You can watch the status by running:
 
 ```Shell
 kubectl get service -l app=nginx-ingress --namespace ingress-basic -w
@@ -252,7 +256,7 @@ References:
 
 ## Create Cosmos DB resources
 
-Create an Azure Cosmos DB account, database and container in the [Azure Portal](https://docs.microsoft.com/en-us/azure/cosmos-db/create-cosmosdb-resources-portal) or using [CLI](https://docs.microsoft.com/en-us/cli/azure/cosmosdb?view=azure-cli-latest).
+Run [this script](scripts\deploy_cosmosdb.ps1) to execute steps 1 through 4 or follow the steps below.
 
 1. Initialize variables:
 
@@ -296,6 +300,8 @@ Create an Azure Cosmos DB account, database and container in the [Azure Portal](
 
 ## Redis
 
+Run [this script](scripts\deploy_redis.ps1) to execute steps 1 through 2 or follow the steps below.
+
 1. Install Redis in your cluster:
 
     ```Shell
@@ -310,9 +316,9 @@ Create an Azure Cosmos DB account, database and container in the [Azure Portal](
     certutil -decode encoded.b64 password.txt
     ```
 
-    Copy the password from password.txt and delete the two files: password.txt and encoded.b64.
+3. Copy the password from password.txt and delete the two files: password.txt and encoded.b64.
 
-3. Set Redis password in [deploy\statestore.yaml](deploy\statestore.yaml).
+4. Set Redis password in [deploy\statestore.yaml](deploy\statestore.yaml).
 
 References:
 
@@ -320,6 +326,8 @@ References:
 * [Setup other state stores](https://github.com/dapr/docs/tree/master/howto/setup-state-store)
 
 ## Service Bus
+
+Run [this script](scripts\deploy_servicebus.ps1) to execute steps 1 through 4 or follow the steps below.
 
 1. Initialize variables. Service Bus namespace name should follow [these rules](https://docs.microsoft.com/en-us/rest/api/servicebus/create-namespace):
 
@@ -363,6 +371,8 @@ References:
 ## Set up distributed tracing
 
 ### Application Insights
+
+Run [this script](scripts\deploy_tracing.ps1) to execute steps 1 through 2 or follow the steps below.
 
 1. Add App Insights extension to Azure CLI:
 
@@ -408,6 +418,8 @@ References:
 [Create an Application Insights resource](https://docs.microsoft.com/en-us/azure/azure-monitor/app/create-new-resource)
 
 ## KEDA
+
+Run [this script](scripts\deploy_keda.ps1) to execute steps 1 through 4 or follow the steps below.
 
 1. Deploy KEDA:
 
@@ -500,6 +512,8 @@ References:
 ## Subscribe to the Blob Storage
 
 Now we need to subscribe to a topic to tell Event Grid which events we want to track, and where to send the events. batch-receiver microservice should already be running to send back a validation code.
+
+Run [this script](scripts\deploy_blob_subscription.ps1) to create the subscription or follow the steps below.
 
 CLI:
 
