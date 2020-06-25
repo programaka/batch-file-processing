@@ -4,7 +4,7 @@ metadata:
   name: batch-processor
   namespace: default
 data:
-  SERVICE_BUS: <your-base64-encoded-connection-string-with-entity-path-included>
+  SERVICE_BUS: <your-base64-encoded-connection-string>
 ---
 apiVersion: apps/v1
 kind: Deployment

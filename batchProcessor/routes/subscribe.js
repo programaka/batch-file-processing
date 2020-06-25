@@ -7,9 +7,10 @@ const combineOrderContent = require('../ordersBuilder');
 const daprPort = process.env.DAPR_HTTP_PORT || 3500;
 
 router.get('/dapr/subscribe', (req, res) => {
-    res.json([
-        'batchReceived'
-    ]);
+    res.json([{
+        topic: "batchReceived",
+        route: "batchReceived"
+    }]);
 });
 
 router.post('/batchReceived', async (req, res) => {
@@ -46,7 +47,7 @@ router.post('/batchReceived', async (req, res) => {
 
             const dbOrders = 'cosmosdb-orders';
             const daprDbOrdersUrl = `http://localhost:${daprPort}/v1.0/bindings/${dbOrders}`;
-            await axios.post(daprDbOrdersUrl, { data: orderData }, { headers: daprHeaders });
+            await axios.post(daprDbOrdersUrl, { data: orderData, operation: 'create' }, { headers: daprHeaders });
                
         } catch (error) {
             let message = error.response.data.message;

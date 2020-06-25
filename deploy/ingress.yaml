@@ -9,10 +9,10 @@ metadata:
 spec:
   tls:
   - hosts:
-    - <dns_name>
+    - <FQDN>
     secretName: tls-secret
   rules:
-  - host: <dns_name>
+  - host: <FQDN>
     http:
       paths:
       - path: /api/(.+)

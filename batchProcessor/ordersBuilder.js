@@ -1,22 +1,13 @@
 const axios = require('axios');
-const yaml = require('js-yaml');
-const fs = require('fs');
-const path = require('path');
+const config = require('./config');
 
 async function combineOrderContent(batchId) {
-    let config;
-    try {
-        config = yaml.safeLoad(fs.readFileSync(path.join(__dirname, 'configMap.yaml'), 'utf8'));
-    } catch (err) {
-        console.log(err);
-    }
+    const blobStorageAccountBaseUrl = config.blobStorageAccountBaseUrl + batchId;
+    const storageSasToken = config.storageSasToken;
 
-    const storageAccountBaseUrl = config.data.storageAccountBaseUrl + batchId;
-    const storageSasToken = config.data.storageSasToken;
-
-    const orderHeaderDetailsCsvUrl = `${storageAccountBaseUrl}-OrderHeaderDetails.csv${storageSasToken}`;
-    const orderLineItemsCsvUrl = `${storageAccountBaseUrl}-OrderLineItems.csv${storageSasToken}`;
-    const productInformationCsvUrl = `${storageAccountBaseUrl}-ProductInformation.csv${storageSasToken}`;
+    const orderHeaderDetailsCsvUrl = `${blobStorageAccountBaseUrl}-OrderHeaderDetails.csv${storageSasToken}`;
+    const orderLineItemsCsvUrl = `${blobStorageAccountBaseUrl}-OrderLineItems.csv${storageSasToken}`;
+    const productInformationCsvUrl = `${blobStorageAccountBaseUrl}-ProductInformation.csv${storageSasToken}`;
 
     let orderHeaderDetailsContent;
     let orderLineItemsContent;

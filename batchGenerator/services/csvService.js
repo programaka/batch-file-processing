@@ -140,7 +140,7 @@ module.exports.sendBatch = async (orderHeaderCsv, lineItemsCsv, productInfoCsv) 
         const payload = generatePayload(orderHeaderCsv, orderHeaderDetailsFile);
         await axios.post(storageBindingUrl, payload);
     } catch (error) {
-        console.log(error);
+        console.log(error.code);
     }
 
     await new Promise(r => setTimeout(r, generateRandomSleep(500, 1000)));
@@ -149,7 +149,7 @@ module.exports.sendBatch = async (orderHeaderCsv, lineItemsCsv, productInfoCsv) 
         const payload = generatePayload(lineItemsCsv, orderLineItemsFile);
         await axios.post(storageBindingUrl, payload);
     } catch (error) {
-        console.log(error);
+        console.log(error.code);
     }
 
     await new Promise(r => setTimeout(r, generateRandomSleep(500, 1000)));
@@ -158,7 +158,7 @@ module.exports.sendBatch = async (orderHeaderCsv, lineItemsCsv, productInfoCsv) 
         const payload = generatePayload(productInfoCsv, productInformationFile);
         await axios.post(storageBindingUrl, payload);
     } catch (error) {
-        console.log(error);
+        console.log(error.code);
     }
 
     await new Promise(r => setTimeout(r, generateRandomSleep(500, 1000)));
@@ -170,7 +170,8 @@ function generatePayload(fileContent, fileName) {
         metadata: {
             blobName: `${fileName}`,
             ContentType: 'text/csv'
-        }
+        },
+        operation: 'create'
     }
 }
 
