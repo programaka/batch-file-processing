@@ -32,7 +32,7 @@ In this reference implementation the following components are used.
 
 `Kubernetes/Azure Kubernetes Service (AKS)` - used to orchestrate and host the containers and their Dapr sidecars for the microservices implemented by this sample, as well as NGINX and the Redis instance used by the solution.
 
-`NGINX` - the ingress controller for Kubernetes used in this sample that will receive the notifications from Event Grid about new blobs in storage and route them to the Batch Processor microservice.
+`NGINX` - the ingress controller for Kubernetes used in this sample that will receive the notifications from Event Grid about new blobs in storage and route them to the Batch Receiver microservice.
 
 `Batch Generator` - a node app microservice that simulates distributors generating CSV files with order information and sends them to `Storage` every 1 min.
 
@@ -49,3 +49,7 @@ In this reference implementation the following components are used.
 ### Deployment
 
 Follow [these steps](deployment.md) to deploy the solution.
+
+### Running and observing the sample
+
+After you deploy the solution you can follow [these steps](observing-sample.md) to run and observe the sample.

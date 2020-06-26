@@ -60,4 +60,4 @@ spec:
       topicName: batchreceived
       subscriptionName: batch-processor
       connection: SERVICE_BUS
-      queueLength: '15'
+      queueLength: '5'
