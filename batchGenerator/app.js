@@ -6,7 +6,6 @@ const { createOrderHeaderCsvContent, createOrderLineItemsCsvContent, createProdu
 const app = express();
 app.use(bodyParser.json());
 
-// TODO: make frequency configurable
 (async () => {
     while (true) {
         let orders = generateOrders();
@@ -23,4 +22,4 @@ app.use(bodyParser.json());
 })();
 
 const port = 3003;
-app.listen(port, () => console.log(`Batch Processor listening on port ${port}!`));
+app.listen(port, () => console.log(`Batch Generator listening on port ${port}!`));
