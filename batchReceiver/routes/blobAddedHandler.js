@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const axios = require('axios');
+const config = require('../config');
 
 const daprPort = process.env.DAPR_HTTP_PORT || 3500;
 
@@ -11,7 +12,7 @@ router.post('/', async (req, res) => {
 
     const validationEventType = 'Microsoft.EventGrid.SubscriptionValidationEvent';
     const storageBlobCreatedEvent = 'Microsoft.Storage.BlobCreated';
-    const topic = '/subscriptions/2bcd95b1-1835-4d41-92ac-60c9c434ffd0/resourceGroups/DaprOpenHack/providers/Microsoft.Storage/storageAccounts/dariastorageaccount';
+    const topic = `/subscriptions/${config.subscriptionId}/resourceGroups/${config.resourceGroupName}/providers/Microsoft.Storage/storageAccounts/${config.storageAccountName}`;
 
     if (!req.body) res.status(400).send();
 
