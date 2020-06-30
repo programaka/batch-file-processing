@@ -55,3 +55,5 @@ Follow [these steps](deployment.md) to deploy the solution.
 ### Running and observing the sample
 
 After you deploy the solution you can follow [these steps](observing-sample.md) to run and observe the sample.
+
+[![observing sample gif](images/observing-sample.gif)](observing-sample.md)
