@@ -100,13 +100,13 @@ Run [this script](scripts/deploy_storage.ps1) to execute steps 1 through 4 or fo
     az storage account keys list --account-name <storage-account-name>
     ```
 
-5. Replace <container_base_url> in [batchProcessor\config.json](batchProcessor\config.json) with `https://<storage-account-name>.blob.core.windows.net/orders/`.
+5. Replace <container_base_url> in [batchProcessor/config.json](batchProcessor/config.json) with `https://<storage-account-name>.blob.core.windows.net/orders/`.
 
-6. Replace <storage_sas_token> in [batchProcessor\config.json](batchProcessor\config.json) with the SAS token that you generated earlier.
+6. Replace <storage_sas_token> in [batchProcessor/config.json](batchProcessor/config.json) with the SAS token that you generated earlier.
 
-7. Update [batchReceiver\config.json](batchReceiver\config.json) with your storage account name, resource group name and Azure subscription ID.
+7. Update [batchReceiver/config.json](batchReceiver/config.json) with your storage account name, resource group name and Azure subscription ID.
 
-8. Replace <storage_account_name> and <storage_account_access_key> in [deploy\blob-storage.yaml](deploy\blob-storage.yaml) with your storage account name and the access key value you copied earlier.
+8. Replace <storage_account_name> and <storage_account_access_key> in [deploy/blob-storage.yaml](deploy/blob-storage.yaml) with your storage account name and the access key value you copied earlier.
 
 References:
 
@@ -117,7 +117,7 @@ References:
 
 In this section we will deploy an NGINX ingress controller with a static public IP and map the IP to a DNS name.
 
-Run [this script](scripts\deploy_NGINX.ps1) to execute steps 1 through 6 or follow the steps below.
+Run [this script](scripts/deploy_NGINX.ps1) to execute steps 1 through 6 or follow the steps below.
 
 1. Initialize variables:
 
@@ -231,13 +231,13 @@ Event Grid Web Hook which we'll be configuring later has to be HTTPS and self-si
 
     You should see the cert-manager, cert-manager-cainjector, and cert-manager-webhook pod in a Running state. It may take a minute or so for the TLS assets required for the webhook to function to be provisioned. This may cause the webhook to take a while longer to start for the first time than other pods `https://cert-manager.io/docs/installation/kubernetes/`.
 
-6. Set your email in [deploy\cluster-issuer.yaml](deploy\cluster-issuer.yaml) and run:
+6. Set your email in [deploy/cluster-issuer.yaml](deploy/cluster-issuer.yaml) and run:
 
     ```Shell
     kubectl apply -f .\deploy\cluster-issuer.yaml --namespace ingress-basic
     ```
 
-7. Set your FQDN in [deploy\ingress.yaml](deploy\ingress.yaml) and run:
+7. Set your FQDN in [deploy/ingress.yaml](deploy/ingress.yaml) and run:
 
     ```Shell
     kubectl apply -f .\deploy\ingress.yaml  --namespace ingress-basic
@@ -256,7 +256,7 @@ References:
 
 ## Create Cosmos DB resources
 
-Run [this script](scripts\deploy_cosmosdb.ps1) to execute steps 1 through 4 or follow the steps below.
+Run [this script](scripts/deploy_cosmosdb.ps1) to execute steps 1 through 4 or follow the steps below.
 
 1. Initialize variables:
 
@@ -296,11 +296,11 @@ Run [this script](scripts\deploy_cosmosdb.ps1) to execute steps 1 through 4 or f
     az cosmosdb keys list -g $resourceGroupName --name $dbAccountName --type connection-strings
     ```
 
-6. Update the yaml file with DB account endpoint, DB key, database and container name [deploy\cosmosdb-orders.yaml](deploy\cosmosdb-orders.yaml).
+6. Update the yaml file with DB account endpoint, DB key, database and container name [deploy/cosmosdb-orders.yaml](deploy/cosmosdb-orders.yaml).
 
 ## Redis
 
-Run [this script](scripts\deploy_redis.ps1) to execute steps 1 through 2 or follow the steps below.
+Run [this script](scripts/deploy_redis.ps1) to execute steps 1 through 2 or follow the steps below.
 
 1. Install Redis in your cluster:
 
@@ -318,7 +318,7 @@ Run [this script](scripts\deploy_redis.ps1) to execute steps 1 through 2 or foll
 
 3. Copy the password from password.txt and delete the two files: password.txt and encoded.b64.
 
-4. Set Redis password in [deploy\statestore.yaml](deploy\statestore.yaml).
+4. Set Redis password in [deploy/statestore.yaml](deploy/statestore.yaml).
 
 References:
 
@@ -327,7 +327,7 @@ References:
 
 ## Service Bus
 
-Run [this script](scripts\deploy_servicebus.ps1) to execute steps 1 through 4 or follow the steps below.
+Run [this script](scripts/deploy_servicebus.ps1) to execute steps 1 through 4 or follow the steps below.
 
 1. Initialize variables. Service Bus namespace name should follow [these rules](https://docs.microsoft.com/en-us/rest/api/servicebus/create-namespace):
 
@@ -361,7 +361,7 @@ Run [this script](scripts\deploy_servicebus.ps1) to execute steps 1 through 4 or
     Write-Host "Connection String:", $connectionString
     ```
 
-5. Replace <namespace_connection_string> in [deploy\messagebus.yaml](deploy\messagebus.yaml) with your connection string.
+5. Replace <namespace_connection_string> in [deploy/messagebus.yaml](deploy/messagebus.yaml) with your connection string.
 
 References:
 
@@ -372,7 +372,7 @@ References:
 
 ### Application Insights
 
-Run [this script](scripts\deploy_tracing.ps1) to execute steps 1 through 2 or follow the steps below.
+Run [this script](scripts/deploy_tracing.ps1) to execute steps 1 through 2 or follow the steps below.
 
 1. Add App Insights extension to Azure CLI:
 
@@ -393,7 +393,7 @@ Run [this script](scripts\deploy_tracing.ps1) to execute steps 1 through 2 or fo
 
 ### LocalForwarder
 
-1. Open the [deployment file](deploy\localforwarder-deployment.yaml) and set the Instrumentation Key value.
+1. Open the [deployment file](deploy/localforwarder-deployment.yaml) and set the Instrumentation Key value.
 2. Deploy the LocalForwarder to your cluster.
 
    ```Shell
@@ -419,7 +419,7 @@ References:
 
 ## KEDA
 
-Run [this script](scripts\deploy_keda.ps1) to execute steps 1 through 4 or follow the steps below.
+Run [this script](scripts/deploy_keda.ps1) to execute steps 1 through 4 or follow the steps below.
 
 1. Deploy KEDA:
 
@@ -452,7 +452,7 @@ Run [this script](scripts\deploy_keda.ps1) to execute steps 1 through 4 or follo
     [System.Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes($primaryConnectionString))
     ```
 
-5. Replace `<your-base64-encoded-connection-string>` in [deploy\batch-processor-keda.yaml](deploy\batch-processor-keda.yaml) file.
+5. Replace `<your-base64-encoded-connection-string>` in [deploy/batch-processor-keda.yaml](deploy/batch-processor-keda.yaml) file.
 
 References:
 
@@ -477,15 +477,15 @@ References:
 
 3. Change ACR loginServer and name in the following scripts and run them. They will build an image for each microservice and push it to the registry:
 
-    * [scripts\build_generator.ps1](scripts\build_generator.ps1)
-    * [scripts\build_receiver.ps1](scripts\build_receiver.ps1)
-    * [scripts\build_processor.ps1](scripts\build_processor.ps1)
+    * [scripts/build_generator.ps1](scripts/build_generator.ps1)
+    * [scripts/build_receiver.ps1](scripts/build_receiver.ps1)
+    * [scripts/build_processor.ps1](scripts/build_processor.ps1)
 
 4. Update the following files with your registry loginServer:
 
-    * [deploy\batch-generator.yaml](deploy\batch-generator.yaml)
-    * [deploy\batch-processor-keda.yaml](deploy\batch-processor-keda.yaml)
-    * [deploy\batch-receiver.yaml](deploy\batch-receiver.yaml)
+    * [deploy/batch-generator.yaml](deploy/batch-generator.yaml)
+    * [deploy/batch-processor-keda.yaml](deploy/batch-processor-keda.yaml)
+    * [deploy/batch-receiver.yaml](deploy/batch-receiver.yaml)
 
 References:
 [Create a private container registry using the Azure CLI](https://docs.microsoft.com/en-us/azure/container-registry/container-registry-get-started-azure-cli)
@@ -513,7 +513,7 @@ References:
 
 Now we need to subscribe to a topic to tell Event Grid which events we want to track, and where to send the events. batch-receiver microservice should already be running to send back a validation code.
 
-Run [this script](scripts\deploy_blob_subscription.ps1) to create the subscription or follow the steps below.
+Run [this script](scripts/deploy_blob_subscription.ps1) to create the subscription or follow the steps below.
 
 CLI:
 

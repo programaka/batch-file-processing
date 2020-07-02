@@ -6,9 +6,9 @@ spec:
   type: bindings.azure.cosmosdb
   metadata:
   - name: url
-    value: COSMOS_DB_URI
+    value: <DB_URI>
   - name: masterKey
-    value: COSMOS_DB_PRIMARY_KEY
+    value: <DB_PRIMARY_KEY>
   - name: database
     value: IcecreamDB
   - name: collection
