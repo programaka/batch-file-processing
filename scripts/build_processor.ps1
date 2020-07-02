@@ -1,4 +1,4 @@
-Write-Host "Pushing batch-processor image to ACR"
+Write-Host "Building and pushing batch-processor image to ACR"
 
 $acrLoginServer = "<acr-login-server>"
 $acrName = "<acr-name>"
@@ -7,7 +7,7 @@ $acrName = "<acr-name>"
 az acr login --name $acrName
 
 # Build an image from a Dockerfile
-docker build -t batch-processor:v1 ..\batchProcessor
+docker build -t batch-processor:v1 $PSScriptRoot/../batchProcessor
 
 # Tag the image
 docker tag batch-processor:v1 $acrLoginServer/batch-processor:v1

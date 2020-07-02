@@ -1,4 +1,4 @@
-Write-Host "Pushing batch-generator image to ACR"
+Write-Host "Building and pushing batch-generator image to ACR"
 
 $acrLoginServer = "<acr-login-server>"
 $acrName = "<acr-name>"
@@ -7,7 +7,7 @@ $acrName = "<acr-name>"
 az acr login --name $acrName
 
 # Build an image from a Dockerfile
-docker build -t batch-generator:v1 ..\batchGenerator
+docker build -t batch-generator:v1 $PSScriptRoot/../batchGenerator
 
 # Tag the image
 docker tag batch-generator:v1 $acrLoginServer/batch-generator:v1
