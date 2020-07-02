@@ -7,8 +7,8 @@ spec:
   type: bindings.azure.blobstorage
   metadata:
   - name: storageAccount
-    value: STORAGE_ACCOUNT_NAME
+    value: <storage_account_name>
   - name: storageAccessKey
-    value: STORAGE_ACCOUNT_ACCESS_KEY
+    value: <storage_account_access_key>
   - name: container
     value: orders
