@@ -14,4 +14,4 @@ az servicebus topic create --name batchreceived `
 
 # Get the connection string for the namespace
 $connectionString=$(az servicebus namespace authorization-rule keys list --resource-group $resourceGroupName --namespace-name $namespaceName --name RootManageSharedAccessKey --query primaryConnectionString --output tsv)
-Write-Host "Connection String:", $connectionString
+Write-Host "Connection String:" $connectionString

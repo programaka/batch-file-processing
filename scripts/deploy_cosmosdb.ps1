@@ -3,7 +3,6 @@ $dbAccountName = "<db-account-name>"
 $dbName = "IcecreamDB"
 $containerName = "Orders"
 
-
 # Create an Azure Cosmos DB database account
 az cosmosdb create --name $dbAccountName --resource-group $resourceGroupName
 

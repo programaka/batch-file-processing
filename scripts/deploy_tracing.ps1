@@ -8,5 +8,3 @@ az monitor app-insights component create `
     --resource-group <resource-group-name>
 
 # Copy the value of the instrumentationKey, we will need it later
-
-

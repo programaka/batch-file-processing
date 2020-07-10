@@ -4,7 +4,7 @@ $clusterName = "<aks-name>"
 # Choose a name for your public IP address which we will use in the next steps
 $publicIpName = "<public-ip-name>"
 
-# Choose a DNS name which we will create and link to the public IP address in the next steps.
+# Choose a DNS name which we will create and link to the public IP address in the next steps
 # Your fully qualified domain name will be: <dns-label>.<location>.cloudapp.azure.com
 $dnsName = "<dns-label>"
 
@@ -20,6 +20,7 @@ Write-Host "IP:" $ip
 kubectl create namespace ingress-basic
 
 # Use Helm to deploy an NGINX ingress controller
+helm repo add stable https://kubernetes-charts.storage.googleapis.com/
 helm repo update
 
 helm install nginx-ingress stable/nginx-ingress `

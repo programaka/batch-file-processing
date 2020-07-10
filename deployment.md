@@ -2,7 +2,7 @@
 
 ## Prerequisites
 
-* Docker
+* [Docker](https://docs.docker.com/engine/install/)
 * kubectl
 * Azure CLI
 * Helm3
@@ -90,8 +90,8 @@ Run [this script](scripts/deploy_storage.ps1) to execute steps 1 through 4 or fo
         --expiry <YYYY-MM-DD> `
         --https-only `
         --permissions rwdlacup `
-        --resource-types c `
-        --services b
+        --resource-types sco `
+        --services bfqt
     ```
 
 4. Copy one of the storage account access key values:
@@ -216,11 +216,7 @@ Event Grid Web Hook which we'll be configuring later has to be HTTPS and self-si
     ```Shell
     helm repo update
 
-    helm install `
-    cert-manager `
-    --namespace ingress-basic `
-    --version v0.13.0 `
-    jetstack/cert-manager
+    helm install cert-manager --namespace ingress-basic --version v0.13.0 jetstack/cert-manager
     ```
 
 5. Verify the installation:
@@ -240,7 +236,7 @@ Event Grid Web Hook which we'll be configuring later has to be HTTPS and self-si
 7. Set your FQDN in [deploy/ingress.yaml](deploy/ingress.yaml) and run:
 
     ```Shell
-    kubectl apply -f .\deploy\ingress.yaml  --namespace ingress-basic
+    kubectl apply -f .\deploy\ingress.yaml
     ```
 
     Cert-manager has likely automatically created a certificate object for you using ingress-shim, which is automatically deployed with cert-manager since v0.2.2. If not, follow [this tutorial](https://docs.microsoft.com/en-us/azure/aks/ingress-static-ip#create-a-certificate-object) to create a certificate object.
@@ -250,6 +246,14 @@ Event Grid Web Hook which we'll be configuring later has to be HTTPS and self-si
     ```Shell
     kubectl describe certificate tls-secret --namespace ingress-basic
     ```
+
+    The output should be similar to this and your connection should now be secure:
+
+    | Type   | Reason       | Age | From         | Message                         |
+    |--------|--------------|-----|--------------|---------------------------------|
+    | Normal | GeneratedKey | 98s | cert-manager | Generated a new private key     |
+    | Normal | Requested    | 98s | cert-manager | Created new CertificateRequest resource "tls-secret-**********" |
+    | Normal | Issued       |74s  | cert-manager | Certificate issued successfully |
 
 References:
 [Configure certificates for HTTPS](https://docs.microsoft.com/en-us/azure/aks/ingress-static-ip#install-cert-manager)
@@ -358,7 +362,7 @@ Run [this script](scripts/deploy_servicebus.ps1) to execute steps 1 through 4 or
 
     ```Shell
     $connectionString=$(az servicebus namespace authorization-rule keys list --resource-group $resourceGroupName --namespace-name $namespaceName --name RootManageSharedAccessKey --query primaryConnectionString --output tsv)
-    Write-Host "Connection String:", $connectionString
+    Write-Host "Connection String:" $connectionString
     ```
 
 5. Replace <namespace_connection_string> in [deploy/messagebus.yaml](deploy/messagebus.yaml) with your connection string.
@@ -477,8 +481,8 @@ References:
 
 3. Change ACR loginServer and name in the following scripts and run them. They will build an image for each microservice and push it to the registry:
 
-    * [scripts/build_generator.ps1](scripts/build_generator.ps1)
     * [scripts/build_receiver.ps1](scripts/build_receiver.ps1)
+    * [scripts/build_generator.ps1](scripts/build_generator.ps1)
     * [scripts/build_processor.ps1](scripts/build_processor.ps1)
 
 4. Update the following files with your registry loginServer:

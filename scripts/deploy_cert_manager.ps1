@@ -11,11 +11,7 @@ helm repo add jetstack https://charts.jetstack.io
 helm repo update
 
 # Install the cert-manager Helm chart
-helm install `
-  cert-manager `
-  --namespace ingress-basic `
-  --version v0.13.0 `
-  jetstack/cert-manager
+helm install cert-manager --namespace ingress-basic --version v0.13.0 jetstack/cert-manager
 
 # Verify the installation - kubectl get pods --namespace ingress-basic
 # You should see the cert-manager, cert-manager-cainjector, and cert-manager-webhook pod
@@ -28,7 +24,7 @@ helm install `
 kubectl apply -f .\deploy\cluster-issuer.yaml --namespace ingress-basic
 
 # Set your FQDN in \deploy\ingress.yaml and run:
-kubectl apply -f .\deploy\ingress.yaml  --namespace ingress-basic
+kubectl apply -f .\deploy\ingress.yaml
 
 # Cert-manager has likely automatically created a certificate object
 # for you using ingress-shim, which is automatically deployed with
@@ -38,3 +34,5 @@ kubectl apply -f .\deploy\ingress.yaml  --namespace ingress-basic
 
 # To test, run:
 # kubectl describe certificate tls-secret --namespace ingress-basic
+#
+# You connection should now be secure.
