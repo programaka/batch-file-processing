@@ -6,4 +6,3 @@ kubectl get secret --namespace default redis -o jsonpath="{.data.redis-password}
 certutil -decode encoded.b64 password.txt
 
 # copy the password from password.txt and delete the two files: password.txt and encoded.b64
-
