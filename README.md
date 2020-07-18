@@ -1,6 +1,6 @@
 # Dapr - Batch File Processing End-to-End Sample
 
-This sample demonstrates an end-to-end sample for processing a batch of related text files using microservices and Dapr. Through this sample you will learn about Dapr's state management, bindings, Pub/Sub, and end-to-end tracing.
+This sample demonstrates an end-to-end sample for processing a batch of related text files using microservices and Dapr. Through this sample you will learn about Dapr's state management, bindings, Pub/Sub, and end-to-end tracing. The sample was last validated on Dapr v0.9.0.
 
 ## Scenario
 
@@ -21,6 +21,8 @@ This sample implementation for the batch file processing scenario combines Dapr 
 Azure Storage receives batches of files (from the [Batch Generator](batchGenerator) simulator). Each file will trigger an Event Grid notification to a [Batch Receiver](batchReceiver) microservice that uses state management to identify when all files for a batch have arrived. Then Pub/Sub is used to trigger a [Batch Processor](batchProcessor) that will transform the batches into individual JSON based orders, and save to Cosmos DB. Dapr's end-to-end tracing is used to send tracing information to App Insights. Pub/Sub is used to provide a layer of load levelling and for scaling the Batch Processor using KEDA, as the processor does the bulk of the processing work.
 
 ![Solution Diagram](images/solution-diagram-v2.png)
+![Solution Diagram](images/solution-diagram-v2.png)
+solution-diagram-generic.png
 
 In this reference implementation the following components are used.
 
