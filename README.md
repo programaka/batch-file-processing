@@ -20,9 +20,7 @@ This sample implementation for the batch file processing scenario combines Dapr 
 
 Azure Storage receives batches of files (from the [Batch Generator](batchGenerator) simulator). Each file will trigger an Event Grid notification to a [Batch Receiver](batchReceiver) microservice that uses state management to identify when all files for a batch have arrived. Then Pub/Sub is used to trigger a [Batch Processor](batchProcessor) that will transform the batches into individual JSON based orders, and save to Cosmos DB. Dapr's end-to-end tracing is used to send tracing information to App Insights. Pub/Sub is used to provide a layer of load levelling and for scaling the Batch Processor using KEDA, as the processor does the bulk of the processing work.
 
-![Solution Diagram](images/solution-diagram-v2.png)
-![Solution Diagram](images/solution-diagram-v2.png)
-solution-diagram-generic.png
+![Solution Diagram - Generic](images/solution-diagram-generic.png)
 
 In this reference implementation the following components are used.
 
@@ -47,6 +45,8 @@ In this reference implementation the following components are used.
 `Cosmos DB` - the NoSQL data store used by the sample to store the individual orders in JSON format. This would then be used downstream by other solutions in the company.
 
 `App Insights` - Azure App Insights is used for all the end-to-end tracing created by Dapr for the microservices in the solution.
+
+![Solution Diagram](images/solution-diagram-v2.png)
 
 ### Deployment
 
