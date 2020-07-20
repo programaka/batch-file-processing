@@ -32,7 +32,7 @@
 
 9. Now let's run our Batch Processor to process the messages.
 
-    ```Shell
+    ```powershell
     kubectl apply -f .\deploy\batch-processor-keda.yaml
     ```
 
