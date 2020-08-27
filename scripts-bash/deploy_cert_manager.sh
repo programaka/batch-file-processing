@@ -33,6 +33,6 @@ kubectl apply -f deploy/ingress.yaml
 # to create a certificate object.
 
 # To test, run:
-# kubectl describe certificate tls-secret --namespace ingress-basic
+# kubectl describe certificate tls-secret
 #
 # You connection should now be secure.

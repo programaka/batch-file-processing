@@ -75,7 +75,7 @@ router.post('/', async (req, res) => {
                 // publish event
                 console.log(`${logPrefix(traceparentId)} publishing batch received event`);
                 const topic = 'batchReceived';
-                let daprPublishUrl = `http://localhost:3500/v1.0/publish/${topic}`;
+                let daprPublishUrl = `http://localhost:3500/v1.0/publish/messagebus/${topic}`;
                 await axios.post(daprPublishUrl, {"batchId": `${batchTimestamp}`}, {
                     headers: daprHeaders
                 });
