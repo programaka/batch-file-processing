@@ -33,7 +33,7 @@ Run [this script](scripts/deploy_aks.ps1) to deploy an AKS cluster or follow the
 4. Create an Azure Kubernetes Service cluster:
 
     ```powershell
-    az aks create --resource-group <resource-group-name> --name <cluster-name> --node-count 2 --kubernetes-version 1.14.8 --enable-addons http_application_routing --generate-ssh-keys --location westus2
+    az aks create --resource-group <resource-group-name> --name <cluster-name> --node-count 2 --kubernetes-version 1.17.9 --enable-addons http_application_routing --generate-ssh-keys --location westus2
     ```
 
 References:
@@ -244,7 +244,7 @@ Event Grid Web Hook which we'll be configuring later has to be HTTPS and self-si
 8. To test, run:
 
     ```powershell
-    kubectl describe certificate tls-secret --namespace ingress-basic
+    kubectl describe certificate tls-secret
     ```
 
     The output should be similar to this and your connection should now be secure:

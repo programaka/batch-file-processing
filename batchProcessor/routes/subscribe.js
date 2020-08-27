@@ -9,7 +9,8 @@ const daprPort = process.env.DAPR_HTTP_PORT || 3500;
 router.get('/dapr/subscribe', (req, res) => {
     res.json([{
         topic: "batchReceived",
-        route: "batchReceived"
+        route: "batchReceived",
+        pubsubName: "messagebus"
     }]);
 });
 
