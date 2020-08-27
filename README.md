@@ -1,5 +1,11 @@
 # Dapr - Batch File Processing End-to-End Sample
 
+| Attribute            | Details    |
+| -------------------- | ---------- |
+| Dapr runtime version | v0.10      |
+| Language             | JavaScript |
+| Environment          | Kubernetes |
+
 This sample demonstrates an end-to-end sample for processing a batch of related text files using microservices and Dapr. Through this sample you will learn about Dapr's state management, bindings, Pub/Sub, and end-to-end tracing. The sample was last validated on Dapr v0.9.0.
 
 ## Scenario
